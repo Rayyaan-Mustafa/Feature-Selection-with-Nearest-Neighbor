@@ -1,5 +1,6 @@
-import pandas as pd
+import numpy as np
 import math
+
 
 def main():
     print('Welcome to Rayyaan\'s Feature Selection Algorithm.')
@@ -10,19 +11,19 @@ def main():
 
     number_correctly_classified = 0
     for i in range(0, len(data)):#for each row 'i' in the data
-        object_to_classify = data.iloc[i][1:]#selecting all the features of a row
-        label_object_to_classify = data.iloc[i][0]#selcting the label of a row(1 or 2)
+        object_to_classify = data[i][1:]#selecting all the features of a row
+        label_object_to_classify = data[i][0]#selcting the label of a row(1 or 2)
 
         nearest_neighbor_distance = float('inf')
         nearest_neighbor_location = float('inf')
 
         for k in range(0,len(data)):#for each row 'k' in the data
             if k != i:
-                distance = math.sqrt(sum(object_to_classify - data.iloc[k][1:])**2)
+                distance = math.sqrt(sum(object_to_classify - data[k][1:])**2)
                 if distance < nearest_neighbor_distance:
                     nearest_neighbor_distance = distance
                     nearest_neighbor_location = k
-                    nearest_neighbor_label = data.iloc[nearest_neighbor_location][0]
+                    nearest_neighbor_label = data[nearest_neighbor_location][0]
         print("Object " + str(i) + " is class " + str(label_object_to_classify))
         print("It's nearest neighbor is " + str(nearest_neighbor_location) + " which is in class " + str(nearest_neighbor_label))
         if label_object_to_classify == nearest_neighbor_label:
@@ -49,7 +50,7 @@ def nearestNeighbour(fname):
 
 #function to load /Users/rayyaan/Documents/GitHub/Feature-Selection-with-Nearest-Neighbor/CS170_Small_Data__64.txt
 def loadFile(fname):
-    data = pd.read_fwf(fname, header=None) #read the file into a pandas dataframe and get rid of header
+    data = np.loadtxt(fname) #read the file into an numpy array
     return data
 
 
