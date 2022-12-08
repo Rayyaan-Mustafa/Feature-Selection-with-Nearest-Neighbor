@@ -6,7 +6,6 @@ import copy
 import logging
 
 def automate_tests():
-    results = []
     files = ["CS170_Small_Data__64.txt","CS170_Large_Data__99.txt"]
 
     try:
@@ -73,7 +72,7 @@ def forward_selection(data):
         else:
             current_set_of_features.append(feature_to_add_at_this_level)
         # print("On level " + str(i) + " I added feature " + str(feature_to_add_at_this_level) + " to the current set")
-        print("Feature set " + str(current_set_of_features) + " was best, accuracy is " + str(best_accuracy_so_far*100) + "%")
+        print("Feature set " + str(current_set_of_features) + " was best, accuracy is " + str(round(best_accuracy_so_far*100,2)) + "%")
     print("Finished search!! The best feature subset is " + str(OVERALL_best_set) + ", which has an accuracy of " + str(OVERALL_best_accuracy*100) + "%")
     logging.info("Finished search!! The best feature subset is " + str(OVERALL_best_set) + ", which has an accuracy of " + str(OVERALL_best_accuracy*100) + "%")
     
@@ -143,7 +142,7 @@ def leave_one_out_cross_validation(data, current_set_of_features, feature_to_add
     return accuracy
 
 if __name__ == '__main__':
-    logging.basicConfig(filename='app.log' + str(time.time()), filemode='w', format='%(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 
     main()
+    # logging.basicConfig(filename='app.log' + str(time.time()), filemode='w', format='%(name)s - %(levelname)s - %(message)s',level=logging.INFO)
     # automate_tests()
